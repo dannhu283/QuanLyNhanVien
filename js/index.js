@@ -13,8 +13,27 @@ function addStaff() {
 
   //hiển thị danh sách nhân viên
   display(staffs);
+
+  //reset form
+  resetForm();
 }
-// ẩn bảng modal
+
+//tìm kiếm nhân viên
+function findStaff() {
+  //dom
+  let search = document.getElementById("searchName").value;
+  search = search.trim().toLowerCase();
+  //lọc loại nhân viên trùng khớp
+  let newStaffs = staffs.filter((value) => {
+    let type = value.ratings().trim().toLowerCase();
+    return type.includes(search);
+  });
+  //hiển thị danh sách loại nhân viên phù hợp vừa tìm
+  display(newStaffs);
+}
+
+//hàm xóa nhân viên
+function removeStaff(staffAccount) {}
 
 //hàm nhận giá trị và hiển thị ra giao diện
 function display(staffs) {
@@ -36,7 +55,7 @@ function display(staffs) {
        >
          Chỉnh sửa
        </button>
-       <button
+       <button onclick="removeStaff(staffAccount)"
          class="btn btn-danger"
        >
          Xoá
@@ -48,6 +67,21 @@ function display(staffs) {
   }, "");
 
   document.getElementById("tableDanhSach").innerHTML = html;
+}
+
+// hàm reset giá trị của form
+function resetForm() {
+  document.getElementById("tknv").value = "";
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("datepicker").value = "";
+  document.getElementById("luongCB").value = "";
+  document.getElementById("chucvu").value = "";
+  document.getElementById("gioLam").value = "";
+
+  document.getElementById("tknv").disabled = false;
+  document.getElementById("btnThemNV").disabled = false;
 }
 // Hàm kiểm tra giá trị có rỗng hay không
 function isRequired(value) {
