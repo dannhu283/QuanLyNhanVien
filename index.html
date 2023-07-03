@@ -201,7 +201,7 @@
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="login">
           <header class="head-form mb-0">
             <h2 id="header-title">Log In</h2>
           </header>
@@ -298,6 +298,7 @@
                   </div>
                   <input
                     type="text"
+                    value="Date"
                     name="ngaylam"
                     id="datepicker"
                     class="form-control"
@@ -333,10 +334,10 @@
                     ></span>
                   </div>
                   <select class="form-control" id="chucvu">
-                    <option>Chọn chức vụ</option>
-                    <option>Sếp</option>
-                    <option>Trưởng phòng</option>
-                    <option>Nhân viên</option>
+                    <option value="">Chọn chức vụ</option>
+                    <option value="Sếp">Sếp</option>
+                    <option value="Trưởng phòng">Trưởng phòng</option>
+                    <option value="Nhân viên">Nhân viên</option>
                   </select>
                 </div>
 
@@ -355,16 +356,23 @@
                     id="gioLam"
                     class="form-control input-sm"
                     placeholder="Giờ làm"
+                    aria-valuemin="80"
+                    aria-valuemax="200"
                   />
                 </div>
-                <span class="sp-thongbao" id="tbGiolam"></span>
+                <span class="sp-thongbao" id="tbGiolam">12312</span>
               </div>
             </form>
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer" id="modal-footer">
-            <button id="btnThemNV" type="button" class="btn btn-success">
+            <button
+              onclick="addStaff()"
+              id="btnThemNV"
+              type="button"
+              class="btn btn-success"
+            >
               Thêm người dùng
             </button>
             <button id="btnCapNhat" type="button" class="btn btn-success">
@@ -393,6 +401,7 @@
     <!-- <script src="js/jquery-ui.min.js"></script> -->
     <script src="./js/jquery-ui.js"></script>
     <script src="js/datepicker.js"></script>
+    <script src="./js/Staff.js"></script>
     <script src="./js/index.js"></script>
 
     <!-- Wow -->
