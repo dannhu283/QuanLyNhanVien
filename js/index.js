@@ -66,6 +66,11 @@ function selectStudent(staffAccount) {
 
 //hàm cập nhật
 function updateStaff() {
+  //validation
+  staff = validate();
+  if (!staff) {
+    return;
+  }
   let account = document.getElementById("tknv").value;
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -102,6 +107,7 @@ function updateStaff() {
 //hàm nhận giá trị và hiển thị ra giao diện
 function display(staffs) {
   let html = staffs.reduce((result, value) => {
+    // thêm thuộc tính data-toggle="modal" và  data-target="#myModal" của thư viện boostrap5 có sẵn để hiện bảng login để cập nhật thông tin  (L129)
     return (
       result +
       `
