@@ -32,8 +32,72 @@ function findStaff() {
   display(newStaffs);
 }
 
-//hàm xóa nhân viên
-function removeStaff(staffAccount) {}
+// //hàm xóa nhân viên
+function removeStaff(staffAccount) {
+  staffs = staffs.filter((value) => {
+    return value.account !== staffAccount;
+  });
+
+  display(staffs);
+}
+
+function selectStudent(staffAccount) {
+  //hiện bảng login lên lại màn hình để fill
+
+  // Tìm phần tử staff có account khớp với giá trị của staffAccount
+  let staff = staffs.find((value) => {
+    return value.account === staffAccount;
+  });
+
+  // Fill thông tin của student lên giao diện
+  document.getElementById("tknv").value = staff.account;
+  document.getElementById("name").value = staff.name;
+  document.getElementById("email").value = staff.email;
+  document.getElementById("password").value = staff.password;
+  document.getElementById("datepicker").value = staff.workDay;
+  document.getElementById("luongCB").value = staff.salary;
+  document.getElementById("chucvu").value = staff.position;
+  document.getElementById("gioLam").value = staff.worktTme;
+
+  // disable input account và button thêm nhân viên
+  document.getElementById("tknv").disabled = true;
+  document.getElementById("btnThemNV").disabled = true;
+}
+
+//hàm cập nhật
+function updateStaff() {
+  let account = document.getElementById("tknv").value;
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+  let workDay = document.getElementById("datepicker").value;
+  let salary = document.getElementById("luongCB").value;
+  let position = document.getElementById("chucvu").value;
+  let worktTme = document.getElementById("gioLam").value;
+
+  let staff = new Staff(
+    account,
+    name,
+    email,
+    pass,
+    workDay,
+    salary,
+    position,
+    worktTme
+  );
+  let index = staffs.findIndex((value) => {
+    return value.account === account;
+  });
+
+  //Thay thế phần tử thứ index cho object student mới tạo
+  staffs[index] = staff;
+
+  //hiển thị
+  display(staffs);
+
+  //resetform
+  resetForm();
+}
 
 //hàm nhận giá trị và hiển thị ra giao diện
 function display(staffs) {
@@ -50,12 +114,13 @@ function display(staffs) {
        <td>${value.totalSalary()}</td>
        <td>${value.ratings()}</td>
        <td>
-       <button
-         class="btn btn-warning"
+       <button onclick="selectStudent('${value.account}')"
+         class="btn btn-warning" data-toggle="modal"
+         data-target="#myModal"
        >
          Chỉnh sửa
        </button>
-       <button onclick="removeStaff(staffAccount)"
+       <button onclick="removeStaff('${value.account}')"
          class="btn btn-danger"
        >
          Xoá
@@ -79,7 +144,7 @@ function resetForm() {
   document.getElementById("luongCB").value = "";
   document.getElementById("chucvu").value = "";
   document.getElementById("gioLam").value = "";
-
+  //mở lại giá trị account và nút thêm do trước đó disable
   document.getElementById("tknv").disabled = false;
   document.getElementById("btnThemNV").disabled = false;
 }
@@ -122,7 +187,7 @@ function isSalary(value) {
   if (isNaN(value)) {
     return false;
   }
-  if (value < 1000000 || value > 20000000) {
+  if (value < 1e6 || value > 2e7) {
     return false;
   }
   return true;
@@ -247,7 +312,7 @@ function validate() {
   //xác thực số giờ làm không được để trống và từ 80 - 200 giờ
   if (!isRequired(worktTme)) {
     isValid = false;
-    document.getElementById("tbChucVu").style = "display: block";
+    document.getElementById("tbGiolam").style = "display: block";
     document.getElementById(
       "tbGiolam"
     ).innerHTML = `Số giờ làm không được để trống`;
