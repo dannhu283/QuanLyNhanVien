@@ -98,6 +98,7 @@ function updateStaff() {
 
   //hiển thị
   display(staffs);
+
   //resetform
   resetForm();
 }
@@ -345,9 +346,4 @@ function validate() {
 
   //form không hợp lệ,không tạo ra đối tượng staff
   return undefined;
-}
-
-//hảm ẩn bảng login khi cập nhật thông tin thành công
-function hiddenLogin() {
-  document.getElementById("btnCapNhat").dataset = "data-dismiss";
 }
