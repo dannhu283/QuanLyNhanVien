@@ -29,7 +29,14 @@ function findStaff() {
     return type.includes(search);
   });
   //hiển thị danh sách loại nhân viên phù hợp vừa tìm
-  display(newStaffs);
+  if (newStaffs.length > 0) {
+    display(newStaffs);
+  } else {
+    document.getElementById(
+      "showAlert"
+    ).innerHTML = `📣📣📣 Không có nhân viên nào xếp loại này`;
+    document.getElementById("showAlert").style.fontSize = "20px";
+  }
 }
 
 // //hàm xóa nhân viên
@@ -110,7 +117,7 @@ function display(staffs) {
     return (
       result +
       `
-     <tr>
+     <tr id="showAlert">
        <td>${value.account}</td>
        <td>${value.name}</td>
        <td>${value.email}</td>
