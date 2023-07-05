@@ -42,8 +42,6 @@ function removeStaff(staffAccount) {
 }
 
 function selectStudent(staffAccount) {
-  //hiện bảng login lên lại màn hình để fill
-
   // Tìm phần tử staff có account khớp với giá trị của staffAccount
   let staff = staffs.find((value) => {
     return value.account === staffAccount;
@@ -66,11 +64,6 @@ function selectStudent(staffAccount) {
 
 //hàm cập nhật
 function updateStaff() {
-  //validation
-  staff = validate();
-  if (!staff) {
-    return;
-  }
   let account = document.getElementById("tknv").value;
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -94,12 +87,17 @@ function updateStaff() {
     return value.account === account;
   });
 
+  //validation
+  staff = validate();
+  if (!staff) {
+    return;
+  }
+
   //Thay thế phần tử thứ index cho object student mới tạo
   staffs[index] = staff;
 
   //hiển thị
   display(staffs);
-
   //resetform
   resetForm();
 }
@@ -347,4 +345,9 @@ function validate() {
 
   //form không hợp lệ,không tạo ra đối tượng staff
   return undefined;
+}
+
+//hảm ẩn bảng login khi cập nhật thông tin thành công
+function hiddenLogin() {
+  document.getElementById("btnCapNhat").dataset = "data-dismiss";
 }

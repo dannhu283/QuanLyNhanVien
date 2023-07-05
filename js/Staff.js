@@ -32,11 +32,11 @@ Staff.prototype.ratings = function () {
 };
 Staff.prototype.totalSalary = function () {
   if (this.position === "Sếp") {
-    return this.salary * 3;
+    return (this.salary * 3).toLocaleString();
   }
   if (this.position === "Trưởng phòng") {
-    return this.salary * 2;
+    return (this.salary * 2).toLocaleString();
   } else {
-    return this.salary;
+    return this.salary.toLocaleString();
   }
 };
