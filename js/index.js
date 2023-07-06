@@ -11,6 +11,9 @@ function addStaff() {
   //thêm nhân viên vào danh sách
   staffs.push(staff);
 
+  //ẩn modal sau khi nhập đúng hết các thông tin
+  $("#myModal").modal("hide");
+
   //hiển thị danh sách nhân viên
   display(staffs);
 
@@ -49,6 +52,8 @@ function removeStaff(staffAccount) {
 }
 
 function selectStudent(staffAccount) {
+  //hiện bảng login để cập nhật thông tin mới
+  $("#myModal").modal("show");
   // Tìm phần tử staff có account khớp với giá trị của staffAccount
   let staff = staffs.find((value) => {
     return value.account === staffAccount;
@@ -103,6 +108,8 @@ function updateStaff() {
   //Thay thế phần tử thứ index cho object student mới tạo
   staffs[index] = staff;
 
+  $("#myModal").modal("hide");
+
   //hiển thị
   display(staffs);
 
@@ -113,7 +120,6 @@ function updateStaff() {
 //hàm nhận giá trị và hiển thị ra giao diện
 function display(staffs) {
   let html = staffs.reduce((result, value) => {
-    // thêm thuộc tính data-toggle="modal" và  data-target="#myModal" của thư viện boostrap5 có sẵn để hiện bảng login để cập nhật thông tin  (L129)
     return (
       result +
       `
@@ -127,8 +133,7 @@ function display(staffs) {
        <td>${value.ratings()}</td>
        <td>
        <button onclick="selectStudent('${value.account}')"
-         class="btn btn-warning" data-toggle="modal"
-         data-target="#myModal"
+         class="btn btn-warning"
        >
          Chỉnh sửa
        </button>
