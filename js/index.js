@@ -107,7 +107,7 @@ function updateStaff() {
 
   //Thay thế phần tử thứ index cho object student mới tạo
   staffs[index] = staff;
-
+  //ẩn modal login sau khi cập nhật xong
   $("#myModal").modal("hide");
 
   //hiển thị
