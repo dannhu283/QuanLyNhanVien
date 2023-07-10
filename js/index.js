@@ -63,7 +63,7 @@ function selectStudent(staffAccount) {
   document.getElementById("tknv").value = staff.account;
   document.getElementById("name").value = staff.name;
   document.getElementById("email").value = staff.email;
-  document.getElementById("password").value = staff.password;
+  document.getElementById("password").value = staff.pass;
   document.getElementById("datepicker").value = staff.workDay;
   document.getElementById("luongCB").value = staff.salary;
   document.getElementById("chucvu").value = staff.position;
@@ -107,6 +107,7 @@ function updateStaff() {
 
   //Thay thế phần tử thứ index cho object student mới tạo
   staffs[index] = staff;
+
   //ẩn modal login sau khi cập nhật xong
   $("#myModal").modal("hide");
 
@@ -335,6 +336,7 @@ function validate() {
     ).innerHTML = `Số giờ làm không được để trống`;
   } else if (!isWorkTime(+worktTme)) {
     isValid = false;
+    document.getElementById("tbGiolam").style = "display: block";
     document.getElementById(
       "tbGiolam"
     ).innerHTML = `Số giờ làm giao động từ 80->200`;
