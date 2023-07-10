@@ -63,7 +63,7 @@ function selectStudent(staffAccount) {
   document.getElementById("tknv").value = staff.account;
   document.getElementById("name").value = staff.name;
   document.getElementById("email").value = staff.email;
-  document.getElementById("password").value = staff.password;
+  document.getElementById("password").value = staff.pass;
   document.getElementById("datepicker").value = staff.workDay;
   document.getElementById("luongCB").value = staff.salary;
   document.getElementById("chucvu").value = staff.position;
