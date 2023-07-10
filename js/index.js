@@ -1,13 +1,19 @@
 // danh sách nhân viên
 let staffs = [];
 
-//thêm nhân viên
+//ban đầu chưa thêm nhân viên thì không cho phép cập nhật thông tin
+function diableUpdate() {
+  document.getElementById("btnCapNhat").disabled = true;
+}
+
+//thêm người dùng
 function addStaff() {
   // kiểm tra validate để kiểm tra form và tạo ra nhân viên
   let staff = validate();
   if (!staff) {
     return;
   }
+
   //thêm nhân viên vào danh sách
   staffs.push(staff);
 
@@ -72,6 +78,9 @@ function selectStudent(staffAccount) {
   // disable input account và button thêm nhân viên
   document.getElementById("tknv").disabled = true;
   document.getElementById("btnThemNV").disabled = true;
+
+  //mở lại nút cập nhật
+  document.getElementById("btnCapNhat").disabled = false;
 }
 
 //hàm cập nhật
