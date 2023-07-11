@@ -57,6 +57,12 @@ function removeStaff(staffAccount) {
   display(staffs);
 }
 
+// hàm để khi người dùng cick vào nút đóng thì sẽ xóa giá trị cũ đễ có thể thêm mới nhân viên
+function closesTab() {
+  resetForm();
+  document.getElementById("btnCapNhat").disabled = false;
+}
+
 function selectStudent(staffAccount) {
   //hiện bảng login để cập nhật thông tin mới
   $("#myModal").modal("show");
@@ -184,12 +190,11 @@ function isRequired(value) {
   return true;
 }
 
-//hàm kiểm tra tài khoản giới hạn
+//hàm kiểm tra kí tự đặc biệt
 function isCharacter(value) {
-  let regex = /^\d{4,6}$/;
+  let regex = /^[a-zA-Z0-9_.]+$/;
   return regex.test(value);
 }
-
 //hàm kiểm tra tên nhân viên
 function isName(value) {
   let regex =
@@ -251,12 +256,16 @@ function validate() {
     document.getElementById(
       "tbTKNV"
     ).innerHTML = `Tài khoản không được để trống`;
-  } else if (!isCharacter(account)) {
+  } else if (
+    account.length < 4 ||
+    account.length > 6 ||
+    !isCharacter(account)
+  ) {
     isValid = false;
     document.getElementById("tbTKNV").style = "display: block";
     document.getElementById(
       "tbTKNV"
-    ).innerHTML = `Tài khoản giới hạn từ 4-6 ký số`;
+    ).innerHTML = `Tài khoản giới hạn từ 4-6 ký số và không chưa kí tự đặc biệt,khoảng trắng`;
   } else {
     document.getElementById("tbTKNV").innerHTML = "";
   }
